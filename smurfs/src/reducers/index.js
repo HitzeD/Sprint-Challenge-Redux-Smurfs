@@ -1,5 +1,5 @@
 import { FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE } from "../actions";
-
+import { ADD_NEW_SMURF_START, ADD_NEW_SMURF_SUCCESS, ADD_NEW_SMURF_FAILURE } from '../actions';
 /*
   Be sure to import in all of the action types from `../actions`
 */
@@ -35,6 +35,23 @@ import { FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE } from "
           fetchingSmurfs: false,
           error: action.payload,
         }
+      case ADD_NEW_SMURF_START:
+        return {
+          ...state,
+          addingSmurf: true,
+        }
+      case ADD_NEW_SMURF_SUCCESS:
+       return {
+         ...state,
+         smurfs: action.payload,
+         addingSmurf: false,
+       }
+      case ADD_NEW_SMURF_FAILURE:
+       return {
+         ...state,
+         addingSmurf: false,
+         error: action.payload
+       }
      default:
       return state;
    }
