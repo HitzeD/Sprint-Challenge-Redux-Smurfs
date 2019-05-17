@@ -61,7 +61,17 @@ class App extends Component {
             <h5>{smurf.age}</h5>
             <h5>{smurf.height}</h5>
             <button onClick={() => this.deleteSmurf(smurf.id)}>Delete</button>
-            <button onClick={() => this.updateSmurf(smurf.id)}>Update</button>
+            <button onClick={() => {
+              if(this.props.isUpdating){
+                return (
+                  <div>
+                    <input onChange={this.handleChanges} name="name" value={smurf.name} />
+                    <input onChange={this.handleChanges} name="age" value={smurf.age} />
+                    <input onChange={this.handleChanges} name="height" value={smurf.height} />
+                  </div>
+                )
+              }
+            }}>Update</button>
           </div>
         })}
       </div>
@@ -70,7 +80,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  smurfs: state.smurfs
+  smurfs: state.smurfs,
+  isUpdating: state.updateSmurf
 })
 
 
