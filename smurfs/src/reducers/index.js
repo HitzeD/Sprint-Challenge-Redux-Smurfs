@@ -1,5 +1,6 @@
 import { FETCH_SMURFS_START, FETCH_SMURFS_SUCCESS, FETCH_SMURFS_FAILURE } from "../actions";
 import { ADD_NEW_SMURF_START, ADD_NEW_SMURF_SUCCESS, ADD_NEW_SMURF_FAILURE } from '../actions';
+import { DELETE_SMURF_START, DELETE_SMURF_SUCCESS, DELETE_SMURF_FAILURE } from '../actions';
 /*
   Be sure to import in all of the action types from `../actions`
 */
@@ -52,6 +53,23 @@ import { ADD_NEW_SMURF_START, ADD_NEW_SMURF_SUCCESS, ADD_NEW_SMURF_FAILURE } fro
          addingSmurf: false,
          error: action.payload
        }
+      case DELETE_SMURF_START:
+        return {
+          ...state,
+          deletingSmurf: true,
+        }
+      case DELETE_SMURF_SUCCESS:
+        return {
+          ...state,
+          smurfs: action.payload,
+          deletingSmurf: false,
+        }
+      case DELETE_SMURF_FAILURE:
+        return {
+          ...state,
+          deletingSmurf: false,
+          error: action.payload,
+        }
      default:
       return state;
    }
