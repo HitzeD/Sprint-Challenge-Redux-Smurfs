@@ -27,11 +27,9 @@ export const addSmurf = smurf => dispatch => {
   dispatch({ type: ADD_NEW_SMURF_START });
   axios.post('http://localhost:3333/smurfs', smurf)
       .then(res => {
-        console.log(res);
         dispatch({ type: ADD_NEW_SMURF_SUCCESS, payload: res.data })
       })
       .catch(err => {
-        console.log(err.response.data.Error);
         dispatch({ type: ADD_NEW_SMURF_FAILURE, payload: err.response.data.Error })
       })
 }
@@ -43,12 +41,26 @@ export const deleteSmurf = id => dispatch => {
   dispatch({ type: DELETE_SMURF_START });
   axios.delete(`http://localhost:3333/smurfs/${id}`)
     .then(res => {
-      console.log(res.data);
       dispatch({ type: DELETE_SMURF_SUCCESS, payload: res.data })
     })
     .catch(err => {
-      console.log(err)
-      dispatch({ type: DELETE_SMURF_FAILURE, payload: err.response})
+      dispatch({ type: DELETE_SMURF_FAILURE, payload: err.response })
+    });
+}
+
+export const UPDATE_SMURF_START = "UPDATE_SMURF_START";
+export const UPDATE_SMURF_SUCCESS = "UPDATE_SMURF_SUCCESS";
+export const UPDATE_SMURF_FAILURE = "UPDATE_SMURF_FAILURE";
+export const updateSmurf = id => dispatch => {
+  dispatch({ type: UPDATE_SMURF_START });
+  axios.put(`http://localhost:3333/smurfs/${id}`)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: UPDATE_SMURF_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: UPDATE_SMURF_FAILURE, payload: err.response })
     });
 }
 
